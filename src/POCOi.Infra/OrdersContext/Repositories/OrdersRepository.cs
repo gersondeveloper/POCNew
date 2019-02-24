@@ -24,8 +24,7 @@ namespace POCOi.Infra.OrdersContext.Repositories
         {
             string cmdText = "select * from gerson.orders";
             List<ListOrdersQueryResult> orders = new List<ListOrdersQueryResult>();
-            ListOrdersQueryResult newOrder ;
-            int finalResult;
+            ListOrdersQueryResult newOrder;
 
             OracleConnection conn = new OracleConnection(Settings.ConnectionString);
             conn.Open();
@@ -60,14 +59,56 @@ namespace POCOi.Infra.OrdersContext.Repositories
             return orders;
         }
 
-        public GetOrderQueryResult GetOrder(int orderId)
+        public Orders GetOrder(int orderId)
         {
-            throw new NotImplementedException();
+            string cmdText = @"";
+
+            return null;
         }
 
-        public IEnumerable<ListOrdersQueryResult> GetOrdersByStatus(string status)
+        public List<ListOfOrders> GetOrdersByStatus(string status)
         {
-            throw new NotImplementedException();
+            List<ListOfOrders> orders = new List<ListOfOrders>();
+            ListOfOrders newOrder;
+
+            string sqlStatement = String.Join(" ", new string[]
+            {
+             "select order_id, customer_id, status, salesman_id,order_date from gerson.orders where status = :status"
+            });
+
+            using (OracleConnection conn = new OracleConnection(Settings.ConnectionString))
+            {
+                using (OracleCommand cmd = new OracleCommand())
+                {
+                    conn.Open();
+                    cmd.Connection = conn;
+                    cmd.BindByName = true;
+
+                    cmd.CommandText = sqlStatement;
+
+                    cmd.Parameters.Add(new OracleParameter("status", OracleDbType.NVarchar2));
+                    // Gotcha #3 - see how the parameter name decoration (:) has been dropped 
+                    // Gotcha #4 - the table definition is NUMBER(10,0) 
+                    // but there is no Number in the OracleDbType enumeration.  
+                    // You have to figure out what native .Net data type will fit the data without loss
+
+                    cmd.Parameters[0].Value = status;
+
+                    using (OracleDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            newOrder = new ListOfOrders();
+                            newOrder.Order_Id = Convert.ToInt16(reader["Order_Id"]);
+
+                            orders.Add(newOrder);
+                        }
+                    }
+                    conn.Close();
+                    conn.Dispose();
+                }
+                return orders;
+            }
         }
 
         public void Save(Orders oerders)

@@ -10,7 +10,7 @@ namespace POCOi.Domain.OrdersContext.Repositories
     {
         void Save(Orders oerders);
         List<ListOrdersQueryResult> Get();
-        GetOrderQueryResult GetOrder(int orderId);
-        IEnumerable<ListOrdersQueryResult> GetOrdersByStatus(string status);
+        Orders GetOrder(int orderId);
+        List<ListOfOrders> GetOrdersByStatus(string status);
     }
 }

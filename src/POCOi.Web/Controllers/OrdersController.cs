@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using POCOi.Domain.OrdersContext.Repositories;
 
 namespace POCOi.Web.Controllers
@@ -21,13 +22,12 @@ namespace POCOi.Web.Controllers
         // GET: Orders
         public ActionResult Index()
         {
-            return View(_repository.Get());
+            return View();
         }
 
-        // GET: Orders/Details/5
-        public ActionResult Details(int id)
+        public ActionResult CarregaOrdens()
         {
-            return View();
+            return View("_ListOrders", _repository.Get());
         }
 
         // GET: Orders/Create
@@ -54,10 +54,29 @@ namespace POCOi.Web.Controllers
         }
 
         // GET: Orders/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(string status)
         {
-            return View();
+            return View(_repository.GetOrdersByStatus(status));
         }
+
+        public JsonResult PopulateOrdersIdsDDL(string status)
+        {
+            var orders =  _repository.GetOrdersByStatus(status);
+            List<SelectListItem> orderIdList = new List<SelectListItem>();
+
+            for (int i = 0; i < orders.Count; i++)
+            {
+                orderIdList.Add(new SelectListItem { Text = '"' +  Convert.ToString(orders[i].Order_Id) + '"', Value = '"' + Convert.ToString(i) + '"' });
+
+            }
+
+            return Json(new SelectList(orderIdList, "Value", "Text"));
+
+        }
+
+
+
+        //Get:
 
         // POST: Orders/Edit/5
         [HttpPost]
@@ -66,7 +85,7 @@ namespace POCOi.Web.Controllers
         {
             try
             {
-                // TODO: Add update logic here
+                var _order = _repository.GetOrder(id);
 
                 return RedirectToAction(nameof(Index));
             }
