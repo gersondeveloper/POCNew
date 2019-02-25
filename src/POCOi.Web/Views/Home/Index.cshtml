@@ -1,5 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+
+   
 }
 
 @model List<SelectListItem>
@@ -10,16 +12,16 @@
         <div class=" = " row">
             <div class="col-md-5">
                 @*<div class="dropdownStatus">
-                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-                            Dropdown Example
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a href="@Url.Action("Edit","Orders", new { status = "Pending"} )">Pending</a></li>
-                            <li><a href="#">Shipped</a></li>
-                            <li><a href="#">Cancelled</a></li>
-                        </ul>
-                    </div>*@
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                        Dropdown Example
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="@Url.Action("Edit","Orders", new { status = "Pending"} )">Pending</a></li>
+                        <li><a href="#">Shipped</a></li>
+                        <li><a href="#">Cancelled</a></li>
+                    </ul>
+                </div>*@
 
                 @Html.DropDownList("ddlStatus", ViewData["status"] as List<SelectListItem>, "Selecione o Status", new { style = "width=300px", @class = "form-control" })
 
@@ -28,16 +30,20 @@
                 @Html.DropDownList("ddlOrderId", ViewData["orders"] as List<SelectListItem>, "Selecione o ID", new { style = "width=300px", @class = "form-control" })
             </div>
             <div class="col-md-2">
-                @Html.ActionLink("Carregar", "CarregaOrdens","Orders", null, new { @class="btn btn-primary" })
+                @Html.ActionLink("Carregar", "CarregaOrdens", "Orders", null, new { @class = "btn btn-primary" })
+            </div>
+        </div>
+        <br />
+        <br />
+        <br />
+
+        <div class="row">
+            <div class="col-md-12 col-centered">
+                <div id="my-spreadsheet" />
             </div>
         </div>
     </div>
 }
-
-
-
-
-
 
 
 @section Scripts
@@ -45,28 +51,28 @@
     <script type="text/javascript">
         $(document).ready(function () {
 
-            @*$("#ddlStatus").change(function () {
+            data = [
+                [1, 1, 'Shipped', 1, '01/01/2000'],
+                [2, 2, 'Shipped', 2, '02/02/2000'],
+                [3, 3, 'Shipped', 3, '02/02/2000'],
+                [2, 2, 'Shipped', 2, '02/02/2000'],
+                [2, 2, 'Shipped', 2, '02/02/2000'],
+                [2, 2, 'Shipped', 2, '02/02/2000'],
+                [2, 2, 'Shipped', 2, '02/02/2000'],
+                [2, 2, 'Shipped', 2, '02/02/2000'],
+                [2, 2, 'Shipped', 2, '02/02/2000'],
+                [2, 2, 'Shipped', 2, '02/02/2000'],
+                [2, 2, 'Shipped', 2, '02/02/2000'],
+                [2, 2, 'Shipped', 2, '02/02/2000'],
+                [2, 2, 'Shipped', 2, '02/02/2000'],
+                [2, 2, 'Shipped', 2, '02/02/2000'],
+            ];
+            $('#my-spreadsheet').jexcel({
+                data: data,
+                colHeaders: ['Order_Id', 'Customer_Id', 'Status', 'Salesman_Id', 'Order_Date'],
+                colWidths: [100, 100, 100, 100, 100]
+            });
 
-                console.log($('#ddlStatus :selected').text());
-
-                $("#ddlOrderId").empty();
-                $.ajax({
-                    type: 'POST',
-                    url: '@Url.Action("PopulateOrdersIdsDDL", "Orders")',
-                    dataType: 'json',
-                    data: { status: $('#ddlStatus :selected').text() },
-                    success: function (orders) {
-                        $.each(orders, function (i, orders) {
-                            console.log(orders.Text);
-                            $("#ddlOrderId").append('<option value="' + orders.text + '">' + orders.Text + '</option>');
-                        });
-                    },
-                    error: function (ex) {
-                        alert('Falha ao recuperar as IDs' + ex);
-                    }
-                });
-            return false;
-        })*@
-    });
+        });
     </script>
 }

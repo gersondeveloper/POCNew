@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using POCOi.Domain.OrdersContext.Repositories;
+using Newtonsoft.Json;
 
 namespace POCOi.Web.Controllers
 {
@@ -28,6 +29,16 @@ namespace POCOi.Web.Controllers
         public ActionResult CarregaOrdens()
         {
             return View("_ListOrders", _repository.Get());
+        }
+
+        public string CarregaOrdensV2()
+        {
+            var listToJson = _repository.Get();
+            Console.WriteLine(listToJson);
+
+            var result = JsonConvert.SerializeObject(listToJson, Formatting.Indented);
+
+            return result;
         }
 
         // GET: Orders/Create
