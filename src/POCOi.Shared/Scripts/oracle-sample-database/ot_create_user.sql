@@ -14,7 +14,7 @@
 --------------------------------------------------------------------
 
 -- create new user
-CREATE USER OT IDENTIFIED BY yourpassword;
+CREATE USER OT IDENTIFIED BY teste;
 
 -- grant priviledges
 GRANT CONNECT, RESOURCE, DBA TO OT;

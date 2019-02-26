@@ -1,7 +1,5 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
-
-   
 }
 
 @model List<SelectListItem>
@@ -30,7 +28,7 @@
                 @Html.DropDownList("ddlOrderId", ViewData["orders"] as List<SelectListItem>, "Selecione o ID", new { style = "width=300px", @class = "form-control" })
             </div>
             <div class="col-md-2">
-                @Html.ActionLink("Carregar", "CarregaOrdens", "Orders", null, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Carregar", "CarregaOfertas", "Ofertas", null, new { @class = "btn btn-primary" })
             </div>
         </div>
         <br />
@@ -48,7 +46,7 @@
 
 @section Scripts
     {
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
         $(document).ready(function () {
 
             data = [
@@ -74,5 +72,5 @@
             });
 
         });
-    </script>
+    </script> -->
 }

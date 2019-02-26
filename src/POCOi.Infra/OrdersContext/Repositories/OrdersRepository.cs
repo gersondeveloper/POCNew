@@ -61,7 +61,7 @@ namespace POCOi.Infra.OrdersContext.Repositories
 
         public Orders GetOrder(int orderId)
         {
-            string cmdText = @"";
+            // string cmdText = @"";
 
             return null;
         }

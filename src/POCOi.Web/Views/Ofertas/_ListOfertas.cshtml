@@ -1,0 +1,144 @@
+@model IEnumerable<POCOi.Domain.OfertasContext.Entities.Oferta>
+
+<div class="container">
+    <div class="col-md-2">
+        <a asp-action="Create" class="btn btn-primary">Create New</a>
+    </div>
+    <div class="col-md-2">
+        @Html.ActionLink("Back", "Index", "Home", null, new { @class = "btn btn-default" })
+    </div>
+    <div class="col-md-4">
+
+    </div>
+    <div class="col-md-2">
+        <button class="btn btn-success">Importar CSV</button>
+    </div>
+    <div class="col-md-2">
+        <button class="btn btn-success">Exportar CSV</button>
+    </div>
+</div>
+
+<div class="container" style="margin: 30px 0 0 0;">
+    <table class="table table-striped">
+    <thead>
+        <tr style="background-color: #848484; color: white">
+            <th>
+                @Html.DisplayNameFor(model => model.ID_OFERTA_PORTIFOLIO)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ID_SUBIDA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NO_PLANO_FIXO)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NO_PACOTE_VC)
+            </th>
+            <!-- <th>
+                @Html.DisplayNameFor(model => model.IND_SVA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VAL_PRECO_TARGET)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NO_PACOTE_BANDA_LARGA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VAL_PRECO_PLANO_FIXO)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VAL_PRECO_FIXO_LD)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VAL_PRECO_FIXO_VC)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VAL_PRECO_PLANO_VELOX_SEM_SVA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VAL_PRECO_PLANO_VELOX_COM_SVA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VAL_PRECO_SVA_VELOX)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NO_CAMPANHA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NO_OFERTA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DT_CRIACAO)
+            </th> -->
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ID_OFERTA_PORTIFOLIO)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ID_SUBIDA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NO_PLANO_FIXO)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NO_PACOTE_VC)
+            </td>
+            <!-- <td>
+                @Html.DisplayFor(modelItem => item.NO_PACOTE_LD)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IND_SVA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VAL_PRECO_TARGET)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NO_PACOTE_BANDA_LARGA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VAL_PRECO_PLANO_FIXO)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VAL_PRECO_FIXO_LD)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VAL_PRECO_FIXO_VC)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VAL_PRECO_PLANO_VELOX_SEM_SVA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VAL_PRECO_PLANO_VELOX_COM_SVA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VAL_PRECO_SVA_VELOX)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NO_CAMPANHA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NO_OFERTA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DT_CRIACAO)
+            </td> -->
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.ID_SUBIDA }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</div>
+
+@section Scripts
+{
+
+}

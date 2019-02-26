@@ -10,7 +10,9 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using POCOi.Domain.OfertasContext.Repositories;
 using POCOi.Domain.OrdersContext.Repositories;
+using POCOi.Infra.OfertasContext.DataContexts;
 using POCOi.Infra.OrdersContext.DataContexts;
 using POCOi.Infra.OrdersContext.Repositories;
 
@@ -43,8 +45,11 @@ namespace POCOi.Web
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            services.AddScoped<OrdersDataContext, OrdersDataContext>();
-            services.AddTransient<IOrdersRepository, OrdersRepository>();
+            // services.AddScoped<OrdersDataContext, OrdersDataContext>();
+            // services.AddTransient<IOrdersRepository, OrdersRepository>();
+
+            services.AddScoped<OfertasDataContext, OfertasDataContext>();
+            services.AddTransient<IOfertasRepository, OfertasRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
